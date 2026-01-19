@@ -65,7 +65,6 @@ class starboatClient(commands.InteractionBot): # define custom client class
                             pass # if value error raised, user did not have role, therefore do not unignore message
                         else:
                             forceArchive = True # unignore message since override requested
-                if (str(react.emoji) == str(options.confEmote)): ignoreMessage, forceArchive = True, False # exit if message already pinned
 
 
             if (ignoreMessage == True and forceArchive == False): return # exit if criteria not met
