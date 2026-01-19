@@ -65,6 +65,7 @@ class starboatClient(commands.InteractionBot): # define custom client class
                             pass # if value error raised, user did not have role, therefore do not unignore message
                         else:
                             forceArchive = True # unignore message since override requested
+                if (str(react.emoji) == str(options.confEmote)): ignoreMessage, forceArchive = True, False # exit if message already pinned
 
 
             if (ignoreMessage == True and forceArchive == False): return # exit if criteria not met
@@ -103,6 +104,14 @@ except BaseException as err:
 
 @client.slash_command(name="upload_screenshot", description="Add file to message") # inform system we are registering a new command
 async def uploadScreenshot(interaction, message_id, image: disnake.Attachment): # define new command
+    """
+    Add a screenshot to an archive post
+
+    Parameters
+    ----------
+    message_id: ID of archive message to be edited
+    image: Screenshot to attach to message
+    """
     try:
         interaction.author.roles.index(options.manRole) # check for permissions
     except ValueError: # if ValueError thrown, does not have role
@@ -129,6 +138,13 @@ async def uploadScreenshot(interaction, message_id, image: disnake.Attachment): 
 
 @client.slash_command(name="remove_attachments", description=" Remove attachments from a message") # inform system we are registering a new command
 async def clearAttachments(interaction, message_id): # define new command
+    """
+    Remove all attachments from an archive post
+
+    Parameters
+    ----------
+    message_id: ID of archive message to be edited
+    """
     try:
         interaction.author.roles.index(options.manRole) # check for permissions
     except ValueError: # if ValueError thrown, does not have role
